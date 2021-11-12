@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <h1>List of Author ID</h1>
+  <ul>
+    {% for author in author_book %}
+      <li>{{ author }}</li>
+    {% endfor %}
+  </ul>
+
+
+  <form action="/author" method="post">
+    <h3>Add Author</h3>
+    <p>
+      <label for="author_id">Author id :</label>
+      <input type="text" name="author_id">
+    </p>
+
+    <p><input type="submit" value="submit_recipe"></p>
+  </form>
+</body>
+</html>

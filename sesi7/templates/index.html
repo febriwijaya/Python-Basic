@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projek Flask</title>
+</head>
+<body>
+  <div>
+    {% for data in value %}
+    <li>{{ data }}</li>
+    {% endfor %}
+  </div>
+  <div>
+    {% if suasana == "senang" %}
+      <p>dia juga cinta</p>
+    {% elif suasana == "sedih" %}
+      <p>Dia Juga Sedih</p>
+    {% else %}
+      <p>Dia sedih</p>
+    {% endif %}
+  </div>
+  <div>
+    {% set hari = "jumat berkah" %}
+    <p>{{ hari }}</p>
+  </div>
+  <div>
+    {% for data in value %}
+    {% if data == "senin" %}
+      <p>Aku senang sekali</p>
+    {% elif data == "minggu" %}
+      <p>Aku libur senangnya</p>
+    {% endif %}
+    {% endfor %}
+  </div>
+</body>
+</html>
