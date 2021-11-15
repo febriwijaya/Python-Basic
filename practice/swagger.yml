@@ -1,0 +1,240 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with our server code
+  version: "1.0.0"
+  title: Swagger Rest Article
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /avocado:
+    get:
+      operationId: avocado.read_all
+      tags:
+        - Avocado
+      summary: Read the entire set of avocado, sorted by region id
+      description: Read the entire set of avocado, sorted by region id
+      responses:
+        200:
+          description: Successfully read avocado set operation
+          schema:
+            type: array
+            items:
+              properties:
+                regionid:
+                  type: string
+                  description: Region id of the avocado
+                avgprice:
+                  type: string
+                  description: Average price of avocado a , b , c
+                totalvol:
+                  type: string
+                  description: Total volume of avocado
+                avo_a:
+                  type: string
+                  description: Total item of avocado a
+                avo_b:
+                  type: string
+                  description: Total item of avocado b
+                avo_c:
+                  type: string
+                  description: Total item of avocado c
+                type:
+                  type: string
+                  description: Type item of avocado
+                date:
+                  type: string
+                  description: Date when avocado input to db
+
+    post:
+      operationId: avocado.create
+      tags:
+        - Avocado
+      summary: Create an avocado
+      description: Create a new avocado
+      parameters:
+        - name: avocado
+          in: body
+          description: Avocado to create
+          required: True
+          schema:
+            type: object
+            properties:
+              avgprice:
+                type: string
+                description: Average price of avocado a , b , c
+              totalvol:
+                type: string
+                description: Total volume of avocado
+              avo_a:
+                type: string
+                description: Total item of avocado a
+              avo_b:
+                type: string
+                description: Total item of avocado b
+              avo_c:
+                type: string
+                description: Total item of avocado c
+              type:
+                type: string
+                description: Type item of avocado
+
+      responses:
+        201:
+          description: Successfully created avocado
+          schema:
+            properties:
+              regionid:
+                type: string
+                description: Region id of the avocado
+              avgprice:
+                type: string
+                description: Average price of avocado a , b , c
+              totalvol:
+                type: string
+                description: Total volume of avocado
+              avo_a:
+                type: string
+                description: Total item of avocado a
+              avo_b:
+                type: string
+                description: Total item of avocado b
+              avo_c:
+                type: string
+                description: Total item of avocado c
+              type:
+                type: string
+                description: Type item of avocado
+              date:
+                type: string
+                description: Date insert item of avocado
+
+  /avocado/{regionid}:
+    get:
+      operationId: avocado.read_one
+      tags:
+        - Avocado
+      summary: Read an item of avocado
+      description: Read one avocado
+      parameters:
+        - name: regionid
+          in: path
+          description: Id of the avocado to get
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully read an avocado from Avocado data operation
+          schema:
+            type: object
+            properties:
+              regionid:
+                type: string
+                description: Region id of the avocado
+              avgprice:
+                type: string
+                description: Average price of avocado a , b , c
+              totalvol:
+                type: string
+                description: Total volume of avocado
+              avo_a:
+                type: string
+                description: Total item of avocado a
+              avo_b:
+                type: string
+                description: Total item of avocado b
+              avo_c:
+                type: string
+                description: Total item of avocado c
+              type:
+                type: string
+                description: Type item of avocado
+              date:
+                type: string
+                description: Date when avocado input to db
+
+    put:
+      operationId: avocado.update
+      tags:
+        - Avocado
+      summary: Update an avocado
+      description: Update an avocado
+      parameters:
+        - name: regionid
+          in: path
+          description: Id the avocado to update
+          type: integer
+          required: True
+        - name: avocado
+          in: body
+          schema:
+            type: object
+            properties:
+              regionid:
+                type: string
+                description: Region id of the avocado
+              avgprice:
+                type: string
+                description: Average price of avocado a , b , c
+              totalvol:
+                type: string
+                description: Total volume of avocado
+              avo_a:
+                type: string
+                description: Total item of avocado a
+              avo_b:
+                type: string
+                description: Total item of avocado b
+              avo_c:
+                type: string
+                description: Total item of avocado c
+              type:
+                type: string
+                description: Type item of avocado
+      responses:
+        200:
+          description: Successfully updated avocado
+          schema:
+            properties:
+              regionid:
+                type: string
+                description: Region id of the avocado
+              avgprice:
+                type: string
+                description: Average price of avocado a , b , c
+              totalvol:
+                type: string
+                description: Total volume of avocado
+              avo_a:
+                type: string
+                description: Total item of avocado a
+              avo_b:
+                type: string
+                description: Total item of avocado b
+              avo_c:
+                type: string
+                description: Total item of avocado c
+              type:
+                type: string
+                description: Type item of avocado
+
+    delete:
+      operationId: avocado.delete
+      tags:
+        - Avocado
+      summary: Delete an avocado from the avocado list
+      description: Delete an avocado
+      parameters:
+        - name: regionid
+          in: path
+          type: integer
+          description: Id of the person to delete
+          required: true
+      responses:
+        200:
+          description: Successfully deleted a person
