@@ -16,7 +16,7 @@ def read_all():
     :return:                json list of all movies for all directors
     """
     # Query the database for all the movies
-    movies = Movies.query.order_by(db.desc(Movies.release_date)).limit(5)
+    movies = Movies.query.order_by(db.desc(Movies.release_date)).limit(10)
 
     # Serialize the list of movies from our data
     movies_schema = MoviesSchema(many=True)
@@ -51,6 +51,146 @@ def read_one(directors_id, movies_id):
     # Otherwise, nope, didn't find that movies
     else:
         abort(404, f"Movies not found for Id: {movies_id}")
+  
+
+def getMoreBudget():
+    """
+    sorting by more budget function descending
+    """
+    movies = Movies.query.order_by(db.desc(Movies.budget)).limit(10)
+
+    # Serialize the list of movies from our data
+    movies_schema = MoviesSchema(many=True)
+    data = movies_schema.dump(movies)
+    return data
+
+def getLessBudget():
+    """
+    sorting by more budget function ascending
+    """
+    movies = Movies.query.order_by(db.asc(Movies.budget)).limit(10)
+
+    # Serialize the list of movies from our data
+    movies_schema = MoviesSchema(many=True)
+    data = movies_schema.dump(movies)
+    return data
+
+def getMorePopularity():
+    """
+    sorting by more popularity function descending
+    """
+    movies = Movies.query.order_by(db.desc(Movies.popularity)).limit(10)
+
+    # Serialize the list of movies from our data
+    movies_schema = MoviesSchema(many=True)
+    data = movies_schema.dump(movies)
+    return data
+
+def getLessPopularity():
+    """
+    sorting by more popularity function ascending
+    """
+    movies = Movies.query.order_by(db.asc(Movies.popularity)).limit(10)
+
+    # Serialize the list of movies from our data
+    movies_schema = MoviesSchema(many=True)
+    data = movies_schema.dump(movies)
+    return data
+
+def getMoreRevenue():
+    """
+    sorting by more revenue function descending
+    """
+    movies = Movies.query.order_by(db.desc(Movies.revenue)).limit(10)
+
+    # Serialize the list of movies from our data
+    movies_schema = MoviesSchema(many=True)
+    data = movies_schema.dump(movies)
+    return data
+
+def getLessRevenue():
+    """
+    sorting by more revenue function ascending
+    """
+    movies = Movies.query.order_by(db.asc(Movies.revenue)).limit(10)
+
+    # Serialize the list of movies from our data
+    movies_schema = MoviesSchema(many=True)
+    data = movies_schema.dump(movies)
+    return data
+
+def getMoreVoteCount():
+    """
+    sorting by more vote count function descending
+    """
+    movies = Movies.query.order_by(db.desc(Movies.vote_count)).limit(10)
+
+    # Serialize the list of movies from our data
+    movies_schema = MoviesSchema(many=True)
+    data = movies_schema.dump(movies)
+    return data
+
+def getLessVoteCount():
+    """
+    sorting by more revenue function ascending
+    """
+    movies = Movies.query.order_by(db.asc(Movies.vote_count)).limit(10)
+
+    # Serialize the list of movies from our data
+    movies_schema = MoviesSchema(many=True)
+    data = movies_schema.dump(movies)
+    return data
+
+def getTitle(title):
+    """search by title, search for the title based on the input results, using the syntax like
+    which later will look for similar titles on the front and back (%:input:%)"""
+
+    search = "%{}%".format(title)
+
+    movies = (Movies.query.filter(
+        Movies.title.like(search)).limit(10))
+
+    if movies is not None:
+        movies_schema = MoviesSchema(many=True)
+        data = movies_schema.dump(movies)
+        return data
+
+    else:
+        abort(404, f"director not found for name: {title}")
+
+def getOriginalTitle(original_title):
+    """search by original_title, search for the title based on the input results, using the syntax like
+    which later will look for similar titles on the front and back (%:input:%)"""
+
+    search = "%{}%".format(original_title)
+
+    movies = (Movies.query.filter(
+        Movies.original_title.like(search)).limit(10))
+
+    if movies is not None:
+        movies_schema = MoviesSchema(many=True)
+        data = movies_schema.dump(movies)
+        return data
+
+    else:
+        abort(404, f"director not found for name: {original_title}")
+
+def getTagline(tagline):
+    """search by tagline, search for the title based on the input results, using the syntax like
+    which later will look for similar titles on the front and back (%:input:%)"""
+
+    search = "%{}%".format(tagline)
+
+    movies = (Movies.query.filter(
+        Movies.tagline.like(search)).limit(10))
+
+    if movies is not None:
+        movies_schema = MoviesSchema(many=True)
+        data = movies_schema.dump(movies)
+        return data
+
+    else:
+        abort(404, f"director not found for name: {tagline}")
 
 
 def create(directors_id, movies):

@@ -16,12 +16,46 @@ def read_all():
     :return:        json string of list of directors
     """
     # Create the list of directors from our data
-    directors = Directors.query.order_by(Directors.name).limit(5)
+    directors = Directors.query.order_by(Directors.name).limit(10)
 
     # Serialize the data for the response
     directors_schema = DirectorsSchema(many=True)
     data = directors_schema.dump(directors)
     return data
+
+def get_department(department):
+    """
+    sorting by department function from directors, this function is to search anyone who is there
+    on the department of the input parameters, receive the department parameters, return list/json from directors
+    that fits the criteria
+    """
+    directors = (Directors.query.filter(
+        Directors.department.like(department)).limit(10))
+
+    if directors is not None:
+        directors_schema = DirectorsSchema(many=True)
+        data = directors_schema.dump(directors)
+        return data
+
+    else:
+        abort(404, f"director not found for department: {department}")
+
+def get_name(name):
+    """
+    search directors by name function, accepts the name parameter to search for the name of the appropriate directors
+    with input, return json/list of directors and movies that match the criteria
+    """
+    search = "%{}%".format(name)
+    directors = (Directors.query.filter(
+        Directors.name.like(search)).limit(10))
+
+    if directors is not None:
+        directors_schema = DirectorsSchema(many=True)
+        data = directors_schema.dump(directors)
+        return data
+
+    else:
+        abort(404, f"director not found for name: {name}")
 
 
 def read_one(directors_id):
