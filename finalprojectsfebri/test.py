@@ -17,5 +17,11 @@ class FlaskTestCase(unittest.TestCase):
     response = tester.get('/api/directors')
     self.assertEqual(response.status_code, 200)
 
+  def test_get_all_movies(self):
+    connex_app.app.testing = True
+    tester = connex_app.app.test_client(self)
+    response = tester.get('/api/movies')
+    self.assertEqual(response.status_code, 200)
+
 if __name__ == '__main__':
     unittest.main()
